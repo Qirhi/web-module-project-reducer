@@ -97,5 +97,63 @@ export const initialState = {
 
 
 ### Task 3: Stretch goals
-- [ ] There is a version of the calculator focuses on adding individual digits, rather then entire numbers. How do you imagine adding an individual digit to the total state?
-- [ ] [Here is an example](https://freshman.tech/calculator/) of a (non-reducer) approach to building an javascript calculator. Feel free to make a new branch and use the basic ideas in the post to build a new version of the calculator.
+- [x] There is a version of the calculator focuses on adding individual digits, rather then entire numbers. How do you imagine adding an individual digit to the total state?
+- [x] [Here is an example](https://freshman.tech/calculator/) of a (non-reducer) approach to building an javascript calculator. Feel free to make a new branch and use the basic ideas in the post to build a new version of the calculator.
+
+// hook format: [readValue, writeInterface] = useHook(initializers)
+
+## Steps to 
+
+1) import the reducer into the App component
+2) import { createStore } from "react-redux";
+3) create the store, telling Redux chich reducer to use to manage state
+
+const store = createStore(titleReducer);
+
+4) in the reducer, state= initial state
+
+export const titleReducer = (state = initialState, action) => { }
+
+5) provide the store
+
+
+> Providing the store is kind of like laying power lines through a neighborhood. Everything is ready to go, but the individual houses (components) have to hook into the grid with their own custom setup.
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, rootElement
+);
+
+6) connect each component to the store using: mapStateToProps and mapDispatchToProps 
+
+
+// Step 3: connect (Higher Order Component pattern)
+// Option 1: connect(mapStateToProps, mapDispatchToProps)(Component)
+// * mapStateToProps tells us how to read from the store
+// * mapDispatchToProps tells us how to update the store
+
+// mapStateToProps runs within the Redux "garage", so it has direct access to application level state (unlike our component, which only has access through this specific API)
+const mapStateToProps = (state) => {
+  return {
+    editing: state.editing,
+    title: state.title
+  }
+}
+
+// mapDispatchToProps sets up our dispatching functions to be received by the component as props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateTitle: newTitle => dispatch(updateTitle(newTitle)),
+    toggleEditing: () => dispatch(toggleEditing())
+  }
+}
+// Equivalent shorthand: const mapDispatchToProps = {updateTitle, toggleEditing}
+
+// Option 2 (function components only): React Redux Hooks
+// * useSelector to read from the store
+// * useDispatch to update the store
+
+export default connect(mapStateToProps, mapDispatchToProps)(Title);
+// The result of connect(mapStateToProps, mapDispatchToProps) is a kind of "decorator function" (HOC)
+// Invoke the resulting function on the Title component in order to "enhance" our component with Redux-y abilities.
