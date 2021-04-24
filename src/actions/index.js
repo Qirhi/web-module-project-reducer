@@ -21,7 +21,14 @@ export const applyFirstNumber = (firstNumber) => {
 export const changeOperation = (operator) => {
     console.log("changeOperation action creator fires")
     return({type:CHANGE_OPERATION, payload: operator}); 
-} // QUESTION:  How to pass 2 payloads... like numberOne & operator
+} 
+
+/*
+export const changeOperation = (operator, numberOne) => {
+    console.log("changeOperation action creator fires")
+    return({type:CHANGE_OPERATION, payload: {operator, numberOne}}); 
+} // EXAMPLE OF TAKING IN TWO PARAMETERS, PASSING TWO PAYLOADS
+*/
 
 export const clearDisplay = () => {
     console.log("clearDispaly action creator fires")

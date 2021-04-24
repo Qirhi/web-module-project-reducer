@@ -2,7 +2,7 @@ import { CHANGE_MEMORY, APPLY_FIRST_NUMBER, CHANGE_OPERATION, CLEAR_DISPLAY, DO_
 export const WAITING_FOR_FIRST_OPERAND = "WAITING_FOR_FIRST_OPERAND";
 export const WAITING_FOR_SECOND_OPERAND = "WAITING_FOR_SECOND_OPERAND";
 export const CALCULATION_COMPLETE = "CALCULATION_COMPLETE";
-
+// It is ok to put the string constants here, place them where they are relevant
 
 export const initialState = {
     total: 0,

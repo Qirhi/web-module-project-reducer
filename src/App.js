@@ -2,6 +2,7 @@ import React, { useReducer, useState } from 'react';
 import reducer, { initialState, WAITING_FOR_FIRST_OPERAND, WAITING_FOR_SECOND_OPERAND, CALCULATION_COMPLETE } from './reducers/index';
 import './App.css';
 import { applyFirstNumber, changeOperation, clearDisplay, changeMemory, doEquals, changeCalculatorStage } from './actions/index';
+// Always import the export function.  Don't use export default.
 
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
